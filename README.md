@@ -3,7 +3,7 @@ Sync notes written in vim with Evernote through Geeknote.
 
 # Required
 
-[http://www.geeknote.me/install/] Geeknote
+[Geeknote] (http://www.geeknote.me/install/)
 
 # Settings 
 ``` vim
