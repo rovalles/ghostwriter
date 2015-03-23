@@ -18,16 +18,16 @@ function! Ghostwriter()
         let g:ghostwriter_loaded = 1
 
         if path == dir 
-           return 0 
-        else 
            return 1 
+        else 
+           return 0 
         endif
 
     endfunction
 
     if exists("g:ghostwriter_path") && exists("g:ghostwriter_notebook")
-        if call ValidDirectory()
-           call Sync 
+        if ValidDirectory()
+           call Sync()
         endif
     endif
 
