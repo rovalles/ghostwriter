@@ -41,5 +41,9 @@ function! Ghostwriter()
     return obj
 endfunction
 
+if exists('g:ghostwriter_loaded')
+    finish
+endif
+
 autocmd VimLeave * :call Ghostwriter()
-command -nargs=1 Ghostwriter call Ghostwriter().newFile(<f-args>)
+command! -nargs=1 Ghostwriter call Ghostwriter().newFile(<f-args>)
