@@ -1,5 +1,12 @@
 function! Ghostwriter()
-    
+    let obj = {}
+
+    function! obj.newFile(file)
+        echo a:file
+        let file = g:ghostwriter_path . '/' . a:file
+        exec "sp " . file
+    endfunction
+
     function! Sync()
         let script = "gnsync" 
         \ . " --path " . g:ghostwriter_path 
@@ -31,8 +38,8 @@ function! Ghostwriter()
         endif
     endif
 
-
-
+    return obj
 endfunction
 
 autocmd VimLeave * :call Ghostwriter()
+command -nargs=1 Ghostwriter call Ghostwriter().newFile(<f-args>)
