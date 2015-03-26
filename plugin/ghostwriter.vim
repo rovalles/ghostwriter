@@ -1,15 +1,17 @@
 function! Ghostwriter()
+    let g:ghostwriter_loaded = 1
     let obj = {}
+    let s:notebook_path = g:ghostwriter_path . '/' . g:ghostwriter_notebook . '/'
 
     function! obj.newFile(file)
         echo a:file
-        let file = g:ghostwriter_path . '/' . a:file
+        let file = s:notebook_path . a:file
         exec "sp " . file
     endfunction
 
     function! Sync()
         let script = "gnsync" 
-        \ . " --path " . g:ghostwriter_path 
+        \ . " --path " . s:notebook_path 
         \ . " --notebook " . g:ghostwriter_notebook
         \ . " --format markdown" 
         \ . " --logpath ~/.geeknote/geeknote.log"
@@ -21,8 +23,7 @@ function! Ghostwriter()
 
     function! ValidDirectory()
         let path = expand('%:p:h')
-        let dir = fnamemodify(g:ghostwriter_path, ':p:h')
-        let g:ghostwriter_loaded = 1
+        let dir = fnamemodify(s:notebook_path, ':p:h')
 
         if path == dir 
            return 1 
