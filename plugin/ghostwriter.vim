@@ -1,8 +1,10 @@
 function! Ghostwriter()
     let g:ghostwriter_loaded = 1
     let obj = {}
-    let s:notebook_path = g:ghostwriter_path . '/' . g:ghostwriter_notebook . '/'
+    let g:ghostwriter_base = substitute(g:ghostwriter_base, "\/$", "", "")
+    let g:ghostwriter_path = g:ghostwriter_base . '/' . g:ghostwriter_notebook . '/'
 
+    echo g:ghostwriter_base
     function! obj.newFile(file)
         echo a:file
         let file = s:notebook_path . a:file
@@ -11,7 +13,7 @@ function! Ghostwriter()
 
     function! Sync()
         let script = "gnsync" 
-        \ . " --path " . s:notebook_path 
+        \ . " --path " . g:ghostwriter_path
         \ . " --notebook " . g:ghostwriter_notebook
         \ . " --format markdown" 
         \ . " --logpath ~/.geeknote/geeknote.log"
@@ -23,7 +25,7 @@ function! Ghostwriter()
 
     function! ValidDirectory()
         let path = expand('%:p:h')
-        let dir = fnamemodify(s:notebook_path, ':p:h')
+        let dir = fnamemodify(g:ghostwriter_path, ':p:h')
 
         if path == dir 
            return 1 
@@ -33,7 +35,7 @@ function! Ghostwriter()
 
     endfunction
 
-    if exists("g:ghostwriter_path") && exists("g:ghostwriter_notebook")
+    if exists("g:ghostwriter_base") && exists("g:ghostwriter_notebook")
         if ValidDirectory()
            call Sync()
         endif
