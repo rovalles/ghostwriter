@@ -7,8 +7,8 @@ function! Ghostwriter()
     echo g:ghostwriter_base
     function! obj.newFile(file)
         echo a:file
-        let file = s:notebook_path . a:file
-        exec "sp " . file
+        let file = g:ghostwriter_path . a:file
+        exec "sp " . a:file
     endfunction
 
     function! Sync()
