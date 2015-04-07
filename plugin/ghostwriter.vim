@@ -4,11 +4,10 @@ function! Ghostwriter()
     let g:ghostwriter_base = substitute(g:ghostwriter_base, "\/$", "", "")
     let g:ghostwriter_path = g:ghostwriter_base . '/' . g:ghostwriter_notebook . '/'
 
-    echo g:ghostwriter_base
     function! obj.newFile(file)
-        echo a:file
-        let file = g:ghostwriter_path . a:file
-        exec "sp " . a:file
+        let file = s:notebook_path . a:file
+        echo file
+        exec "sp " . file
     endfunction
 
     function! Sync()
